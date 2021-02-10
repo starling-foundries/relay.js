@@ -10,36 +10,52 @@ const {
 const express = require('express');
 const bodyParser = require('body-parser');
 
-async function bounce(message, value, pubkey, signature) {
+async function bounce(pubkey, from, to, amount, fee, nonce, signature) {
     const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
     const CHAIN_ID = 333;
     const MSG_VERSION = 1;
     const VERSION = bytes.pack(CHAIN_ID, MSG_VERSION);
-    privkey = '3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8';
+    privkey = '07e0b1d1870a0ba1b60311323cb9c198d6f6193b2219381c189afab3f5ac41a9';
     zilliqa.wallet.addByPrivateKey(
         privkey
     );
     const myGasPrice = units.toQa('2000', units.Units.Li); // Gas Price that will be used by all transactions
 
-    const contractAddr = "zil1fez4c739auzkfp9argf4nn0j677frykkejjg89";
+    const contractAddr = "0b1384bf248f493226fdd1981b9ea56d6c94424d";
     try {
         const contract = zilliqa.contracts.at(contractAddr);
         const callTx = await contract.call(
-            'setHello',
+            'ChequeSend',
             [
                 {
-                    vname: 'msg',
-                    type: 'String',
-                    value: `${message}`,
-                },{
-                    vname: 'value',
-                    type: 'Uint128',
-                    value: `${value}`,
-                },
-                {
-                    vname: 'signer',
+                    vname: 'pubkey',
                     type: 'ByStr33',
                     value: `0x` + `${pubkey}`,
+                },
+                {
+                    vname: 'from',
+                    type: 'ByStr20',
+                    value: `${from}`,
+                },
+                {
+                    vname: 'to',
+                    type: 'ByStr20',
+                    value: `0x` + `${to}`,
+                },
+                {
+                    vname: 'amount',
+                    type: 'Uint128',
+                    value: `${amount}`,
+                },
+                {
+                    vname: 'fee',
+                    type: 'Uint128',
+                    value: `${fee}`,
+                },
+                {
+                    vname: 'nonce',
+                    type: 'Uint128',
+                    value: `${nonce}`,
                 },
                 {
                     vname: 'signature',
@@ -69,7 +85,7 @@ function main(){
     app.use(express.static("public"));
     app.post('/', (req,res) =>{
         console.log('Got message:', req.body);
-        bounce(req.body.message, req.body.value, req.body.pubkey, req.body.signature )
+        bounce(req.body.pubkey, req.body.from, req.body.to, req.body.amount, req.body.fee, req.body.nonce, req.body.signature )
         res.sendStatus(200);
     })
     app.listen(port, () => {
