@@ -1,4 +1,5 @@
 # relay.js
+![Cheque](cheque.png)
 
 ## Background 
  The ZRC-3 Metatransaction-enabled Fungible Token Contract can be found [here](https://github.com/Zilliqa/ZRC/pull/76). This repository contains the cheque relay to forward metatransactions to the mainchain (also sometimes called a bouncer proxy). 
