@@ -1,7 +1,7 @@
 const fs = require('fs');
-const {Long, bytes, units} = require('@zilliqa-js/util');
-const {Zilliqa} = require('@zilliqa-js/zilliqa');
-const {getAddressFromPrivateKey} = require('@zilliqa-js/crypto');
+const { Long, bytes, units } = require('@zilliqa-js/util');
+const { Zilliqa } = require('@zilliqa-js/zilliqa');
+const { getAddressFromPrivateKey } = require('@zilliqa-js/crypto');
 
 const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
 
@@ -20,7 +20,7 @@ async function main() {
     const myGasPrice = units.toQa('2000', units.Units.Li); // Gas Price that will be used by all transactions
 
     console.log("start to deploy zrc3: ");
-    const code = fs.readFileSync("Dummy.scilla").toString();
+    const code = fs.readFileSync("MetaFungibleToken.scilla").toString();
     console.log("contract code is: ");
     console.log(code);
     const init = [
