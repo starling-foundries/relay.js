@@ -54,3 +54,10 @@ This encourages relayers to resolve cheques ASAP, and forces cheque recipients t
 ## Modifying for subscriptions
 
 To enable subscriptions or perhaps periodic donations, you only need to add two fields to the metatransaction: block_enabled, block_expired. These fields allow you to process an off-chain hashed timelock transaction, but you would have to either register the payload hash in advance or keep a tally of locked away subscription funds as there is no way to guarantee that a delayed metatransaction will reach the contract while the signer still holds the required funds.
+
+## Developing with docker
+
+it takes 3 steps to have a demo bouncer running locally:
+1. Clone this repo
+2. `docker build -t relay .`
+3. `docker run -dp 3002:3002 relay`

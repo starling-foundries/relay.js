@@ -81,6 +81,7 @@ function main(){
     //spin up the express server
     const app = express()
     const port = 3002
+    const host = '0.0.0.0';
     app.use(bodyParser.json())
     app.use(express.static("public"));
     app.post('/', (req,res) =>{
@@ -88,9 +89,7 @@ function main(){
         bounce(req.body.pubkey, req.body.from, req.body.to, req.body.amount, req.body.fee, req.body.nonce, req.body.signature )
         res.sendStatus(200);
     })
-    app.listen(port, () => {
-        console.log(`Example app listening at http://localhost:${port}`)
-      })
+    app.listen(port, host)
     //connect the bouncer function
 }
 main();
