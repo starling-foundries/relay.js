@@ -7,8 +7,8 @@ const {
 
 
 async function main() {
-    const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
-    const CHAIN_ID = 333;
+    const zilliqa = new Zilliqa('https://api.zilliqa.com');
+    const CHAIN_ID = 1;
     const MSG_VERSION = 1;
     const VERSION = bytes.pack(CHAIN_ID, MSG_VERSION);
     privkey = '07e0b1d1870a0ba1b60311323cb9c198d6f6193b2219381c189afab3f5ac41a9';
@@ -22,7 +22,7 @@ async function main() {
     const myGasPrice = units.toQa('2000', units.Units.Li); // Gas Price that will be used by all transactions
 
 
-    const ftAddr = "0b1384bf248f493226fdd1981b9ea56d6c94424d";
+    const ftAddr = "5ff3cae12c97850f8ca3db2d921ead12690e38c3";
     try {
         const contract = zilliqa.contracts.at(ftAddr);
         const callTx = await contract.call(

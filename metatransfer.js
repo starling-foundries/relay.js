@@ -11,9 +11,9 @@ const {
 var hash = require('hash.js')
 
 async function metatransfer() {
-    const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
-    const sender_zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
-    const CHAIN_ID = 333;
+    const zilliqa = new Zilliqa('https://api.zilliqa.com');
+    const sender_zilliqa = new Zilliqa('https://api.zilliqa.com');
+    const CHAIN_ID = 1;
     const MSG_VERSION = 1;
     const VERSION = bytes.pack(CHAIN_ID, MSG_VERSION);
     privkey = '3375F915F3F9AE35E6B301B7670F53AD1A5BE15D8221EC7FD5E503F21D3450C8';
@@ -30,10 +30,10 @@ async function metatransfer() {
     const myGasPrice = units.toQa('2000', units.Units.Li); // Gas Price that will be used by all transactions
 
     //Signature Parameters calculation
-    const amount = 42;
-    const nonce = 14;
+    const amount = 2;
+    const nonce = 13;
     const fee = 2;
-    const contractAddr = "0b1384bf248f493226fdd1981b9ea56d6c94424d";
+    const contractAddr = "5ff3cae12c97850f8ca3db2d921ead12690e38c3";
 
     const amount_bn = new BN(amount)
     const nonce_bn = new BN(nonce)
@@ -82,11 +82,6 @@ async function metatransfer() {
                     vname: 'pubkey',
                     type: 'ByStr33',
                     value: `0x` + `${pubkey}`,
-                },
-                {
-                    vname: 'from',
-                    type: 'ByStr20',
-                    value: `${alice}`,
                 },
                 {
                     vname: 'to',

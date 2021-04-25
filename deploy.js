@@ -3,11 +3,11 @@ const { Long, bytes, units } = require('@zilliqa-js/util');
 const { Zilliqa } = require('@zilliqa-js/zilliqa');
 const { getAddressFromPrivateKey } = require('@zilliqa-js/crypto');
 
-const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
+const zilliqa = new Zilliqa('https://api.zilliqa.com/');
 
 
 async function main() {
-    const CHAIN_ID = 333;
+    const CHAIN_ID = 1;
     const MSG_VERSION = 1;
     const VERSION = bytes.pack(CHAIN_ID, MSG_VERSION);
     privkey = '07e0b1d1870a0ba1b60311323cb9c198d6f6193b2219381c189afab3f5ac41a9';
@@ -54,7 +54,7 @@ async function main() {
             vname: "init_supply",
             type: "Uint128",
             value: `100000000`
-        }
+        },
     ];
     console.log("init json is: ");
     console.log(JSON.stringify(init));
@@ -63,7 +63,7 @@ async function main() {
         const [deployTx, ftoken] = await contract.deployWithoutConfirm({
             version: VERSION,
             gasPrice: myGasPrice,
-            gasLimit: Long.fromNumber(40000)
+            gasLimit: Long.fromNumber(13510)
         }, false);
 
         if (ftoken.error) {
